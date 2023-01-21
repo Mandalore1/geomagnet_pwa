@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Geomagnet PWA</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.25/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.25/"></script>
+    <script type="module" src="https://js.arcgis.com/calcite-components/1.0.0-beta.99/calcite.esm.js"></script>
+</head>
+<body>
+<div id="viewDiv"></div>
+
+<table class="geomagnetic-table" hidden>
+    <tr>
+        <th colspan="3">Geomagnetic Coordinates</th>
+    </tr>
+    <tr>
+        <td>Latitude (MAG)</td>
+        <td>Longitude (MAG)</td>
+        <td>R (MAG), [km]</td>
+    </tr>
+    <tr>
+        <td class="geomagnetic-latitude">1</td>
+        <td class="geomagnetic-longitude">2</td>
+        <td class="geomagnetic-r">3</td>
+    </tr>
+    <tr>
+        <th colspan="3">Parameters of Geomagnetic Dipole</th>
+    </tr>
+    <tr>
+        <td colspan="2">Coordinates of North Pole, [degrees]</td>
+        <td class="coordinates-north-pole">1</td>
+    </tr>
+    <tr>
+        <td colspan="2">Magnetic Moment, [T∙m3]</td>
+        <td class="magnetic-moment">2</td>
+    </tr>
+    <tr>
+        <th colspan="3">Parameters of Geomagnetic Field</th>
+    </tr>
+    <tr>
+        <td colspan="2">Induction Potential, [nT∙km]</td>
+        <td class="induction-potential">1</td>
+    </tr>
+    <tr>
+        <td colspan="2">North Component (X), [nT]</td>
+        <td class="north-component">2</td>
+    </tr>
+    <tr>
+        <td colspan="2">East Component (Y), [nT]</td>
+        <td class="east-component">3</td>
+    </tr>
+    <tr>
+        <td colspan="2">Down Component (Z), [nT]</td>
+        <td class="down-component">4</td>
+    </tr>
+    <tr>
+        <td colspan="2">Total Intensity (F), [nT]</td>
+        <td class="total-intensity">5</td>
+    </tr>
+    <tr>
+        <td colspan="2">Magnetic Declination, [degrees]	</td>
+        <td class="magnetic-declination">6</td>
+    </tr>
+    <tr>
+        <td colspan="2">Magnetic Inclination, [degrees]</td>
+        <td class="magnetic-inclination">7</td>
+    </tr>
+</table>
+
+<calcite-panel id="coordinatesPanel" heading="Enter coordinates and elevation">
+    <div style="padding: 12px">
+        <calcite-label layout="inline-space-between">Latitude
+            <calcite-input id="latitudeInput" alignment="end" max="90" min="-90" placeholder="Latitude" scale="s"
+                           status="idle" suffix-text="N" type="number"></calcite-input>
+        </calcite-label>
+        <calcite-label layout="inline-space-between">Longitude
+            <calcite-input id="longitudeInput" alignment="end" max="90" min="-90" placeholder="Longitude" scale="s"
+                           status="idle" suffix-text="E" type="number"></calcite-input>
+        </calcite-label>
+        <calcite-label layout="inline-space-between">Elevation
+            <calcite-input id="elevationInput" alignment="end" max="1000000" min="0" placeholder="Longitude" scale="s"
+                           status="idle" suffix-text="m" type="number"></calcite-input>
+        </calcite-label>
+        <calcite-button id="calculateButton" width="full">Calculate</calcite-button>
+    </div>
+</calcite-panel>
+
+<script src="script/script.js" type="module"></script>
+</body>
+</html>

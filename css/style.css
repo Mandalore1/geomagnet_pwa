@@ -1,0 +1,22 @@
+html,
+body,
+#viewDiv {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.geomagnetic-table, .geomagnetic-table th, .geomagnetic-table td {
+    border: 1px solid #cccccc;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.geomagnetic-table th {
+    background: #cccccc;
+}
+
+.geomagnetic-table tr:hover{
+    background: #dddddd;
+}
