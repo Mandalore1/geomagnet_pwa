@@ -20,3 +20,7 @@ body,
 .geomagnetic-table tr:hover{
     background: #dddddd;
 }
+
+.coordinate-input {
+    margin-bottom: 5px;
+}

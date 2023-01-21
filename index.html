@@ -71,20 +71,14 @@
     </tr>
 </table>
 
-<calcite-panel id="coordinatesPanel" heading="Enter coordinates and elevation">
+<calcite-panel style="width: 200px" id="coordinatesPanel" heading="Enter coordinates and elevation">
     <div style="padding: 12px">
-        <calcite-label layout="inline-space-between">Latitude
-            <calcite-input id="latitudeInput" alignment="end" max="90" min="-90" placeholder="Latitude" scale="s"
-                           status="idle" suffix-text="N" type="number"></calcite-input>
-        </calcite-label>
-        <calcite-label layout="inline-space-between">Longitude
-            <calcite-input id="longitudeInput" alignment="end" max="90" min="-90" placeholder="Longitude" scale="s"
-                           status="idle" suffix-text="E" type="number"></calcite-input>
-        </calcite-label>
-        <calcite-label layout="inline-space-between">Elevation
-            <calcite-input id="elevationInput" alignment="end" max="1000000" min="0" placeholder="Longitude" scale="s"
-                           status="idle" suffix-text="m" type="number"></calcite-input>
-        </calcite-label>
+        <calcite-input class="coordinate-input" id="latitudeInput" alignment="end" max="90" min="-90"
+                       placeholder="Latitude" scale="s" status="idle" suffix-text="N" type="number"></calcite-input>
+        <calcite-input class="coordinate-input" id="longitudeInput" alignment="end" max="90" min="-90"
+                       placeholder="Longitude" scale="s" status="idle" suffix-text="E" type="number"></calcite-input>
+        <calcite-input class="coordinate-input" id="elevationInput" alignment="end" max="1000000" min="0"
+                       placeholder="Elevation" scale="s" status="idle" suffix-text="m" type="number"></calcite-input>
         <calcite-button id="calculateButton" width="full">Calculate</calcite-button>
     </div>
 </calcite-panel>

@@ -7,13 +7,14 @@ require([
 
     "esri/widgets/Search",
     "esri/widgets/Locate",
+    "esri/widgets/BasemapToggle",
     "esri/widgets/support/DatePicker",
 
     "esri/Graphic",
 
     "esri/geometry/Point"
 
-], function(esriConfig, Map, MapView, Search, Locate, DatePicker, Graphic, Point) {
+], function(esriConfig, Map, MapView, Search, Locate, BasemapToggle, DatePicker, Graphic, Point) {
     esriConfig.apiKey = "AAPK1ce793dff955490f8fde71918cba5e10h-3z4UAL7OpDVFSTBdZ2bliECBtnlUd4mxJ9060z_n8MT3o-_LgcE8Pz4HCovqe9";
 
     // Карта
@@ -47,13 +48,13 @@ require([
     });
     view.ui.add(search, "top-right");
 
-    // Виджет выбора даты
-    const datePicker = new DatePicker()
-    view.ui.add(datePicker, "top-right")
-
     // Виджет выбора координат
     const panel = document.getElementById("coordinatesPanel");
     view.ui.add(panel, "top-right");
+
+    // Виджет выбора даты
+    const datePicker = new DatePicker()
+    view.ui.add(datePicker, "top-right")
 
     // Виджет геолокации
     const locate = new Locate({
@@ -61,10 +62,21 @@ require([
         useHeadingEnabled: false,
         goToOverride: function(view, options) {
             options.target.scale = 1500;
+            showGeomagneticPopup(new Point({
+                latitude: options.target.target.latitude,
+                longitude: options.target.target.longitude
+            }))
             return view.goTo(options.target);
         }
     });
     view.ui.add(locate, "top-left");
+
+    // Виджет изменения карты
+    let basemapToggle = new BasemapToggle({
+        view: view,
+        nextBasemap: "hybrid"
+    });
+    view.ui.add(basemapToggle, "top-left");
 
     // Расчет координат по вводу
     async function onCalculateButtonClick() {
