@@ -24,12 +24,11 @@ require([
     });
 
     // Отображение карты
-    const defaultLocation = [55.97, 54.74]
     const view = new MapView({
         container: "viewDiv",
         map: map,
-        center: defaultLocation,
-        zoom: 12
+        center: new Point(JSON.parse(localStorage["lastPosition"] || "null")) || [55.97, 54.74],
+        zoom: localStorage["lastZoom"] || 12
     });
 
     // Начальная геолокация
@@ -38,9 +37,10 @@ require([
         timeout: 5000
     };
 
-    navigator.geolocation.getCurrentPosition((pos) =>
-            view.goTo({center: [pos.coords.longitude, pos.coords.latitude]}),
-        () => console.warn("Не удалось определить геолокацию"), options);
+    if (!localStorage["lastPosition"])
+        navigator.geolocation.getCurrentPosition((pos) =>
+                view.goTo({center: [pos.coords.longitude, pos.coords.latitude]}),
+            () => console.warn("Не удалось определить геолокацию"), options);
 
     // Виджет поиска
     const search = new Search({
@@ -215,4 +215,11 @@ require([
     view.popup.autoOpenEnabled = false
     view.popup.dockOptions.position = "top-center"
     view.on("click", mapOnClick)
+
+    // Сохранение последнего местоположения при закрытии
+    window.onbeforeunload = (e) => {
+        e.preventDefault()
+        localStorage["lastPosition"] = JSON.stringify(view.center)
+        localStorage["lastZoom"] = view.zoom
+    }
 });
