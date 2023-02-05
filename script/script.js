@@ -183,6 +183,10 @@ require([
         view.popup.collapsed = false
         view.goTo({center: mapPoint})
 
+        // Сохраняем последнее местоположение при клике на карту
+        localStorage["lastPosition"] = JSON.stringify(mapPoint)
+        localStorage["lastZoom"] = view.zoom
+
         addMarker(coords.latitude, coords.longitude)
 
         document.getElementById("latitudeInput").value = coords.latitude.toFixed(4)
@@ -215,11 +219,4 @@ require([
     view.popup.autoOpenEnabled = false
     view.popup.dockOptions.position = "top-center"
     view.on("click", mapOnClick)
-
-    // Сохранение последнего местоположения при закрытии
-    window.onbeforeunload = (e) => {
-        e.preventDefault()
-        localStorage["lastPosition"] = JSON.stringify(view.center)
-        localStorage["lastZoom"] = view.zoom
-    }
 });
