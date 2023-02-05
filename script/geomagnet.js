@@ -49,10 +49,13 @@ async function getGeomagneticData(coords, date) {
     Делает запрос на сервер и получает геомагнитные данные. Возвращает объект с данными.
     coords - координаты долготы, ширины и высоты, date - дата
      */
+    // На сервер дату нужно послать в виде того, какая часть года уже прошла.
+    // Например, 31 января: 31/365 = 0.08
     let yearProportion = (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
         - Date.UTC(date.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1000
     yearProportion = (yearProportion / 365).toFixed(2).split(".")[1]
 
+    // Выставим get-параметры запроса
     const sp = new URLSearchParams({
         lat: coords.latitude.toFixed(4),
         lng: coords.longitude.toFixed(4),
@@ -60,10 +63,12 @@ async function getGeomagneticData(coords, date) {
         data: date.getUTCFullYear() + "." + yearProportion,
         h: date.getUTCHours()
     })
+    // Получим в ответ json, в котором указан массив без обозначений
     const url = "https://geomagnet.ru/calc/?" + sp
     let geoData = await fetch(url)
     geoData = await geoData.json()
 
+    // Получим данные из массива и выдадим
     return parseResponse(geoData)
 }
 
