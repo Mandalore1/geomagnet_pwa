@@ -106,8 +106,8 @@ require([
             }
         }
 
-        const latitude = getInput("latitudeInput", 0, 90)
-        const longitude = getInput("longitudeInput", 0, 90)
+        const latitude = getInput("latitudeInput", -90, 90)
+        const longitude = getInput("longitudeInput", -180, 180)
         const elevation = getInput("elevationInput", 0, 1000000)
 
         // Если есть невалидные данные, выйдем
