@@ -48,7 +48,16 @@ require([
 
     // Виджет поиска
     const search = new Search({
-        view: view
+        view: view,
+        goToOverride: function(view, options) {
+            // При геолокации показываем геомагнитные координаты
+            options.target.scale = 1500;
+            showGeomagneticPopup(new Point({
+                latitude: options.target.target.geometry.centroid.latitude,
+                longitude: options.target.target.geometry.centroid.longitude
+            }))
+            return view.goTo(options.target);
+        }
     });
     view.ui.add(search, "top-right");
 
